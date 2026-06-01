@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>North & Vine Cafe</title>
+  <meta name="description" content="A refined cafe website template with menu, booking, and a modern premium design." />
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+    :root {
+      --bg: #f7f3ed;
+      --surface: #ffffff;
+      --surface-2: #f0e7db;
+      --text: #221c16;
+      --muted: #6f655d;
+      --brand: #8a5a3c;
+      --brand-2: #b8835f;
+      --line: #e7ddd1;
+      --shadow: 0 18px 50px rgba(34, 28, 22, 0.09);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, #fffdf9 0%, var(--bg) 45%, #f1e8dd 100%);
+      line-height: 1.6;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 16px;
+      background: #111;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 999px;
+      z-index: 1000;
+    }
+
+    .skip-link:focus { left: 16px; }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(231, 221, 209, 0.9);
+    }
+
+    .nav {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: var(--shadow);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 10px 12px 12px;
+      border-radius: 50% 50% 45% 45%;
+      border: 2px solid rgba(255,255,255,0.65);
+      border-top-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--brand);
+    }
+
+    .cta {
+      background: var(--text);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 68px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.7);
+      border-radius: 999px;
+      color: var(--brand);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(3rem, 6vw, 5.6rem);
+      max-width: 11ch;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+    }
+
+    p { margin: 0; }
+
+    .lead {
+      margin-top: 18px;
+      color: var(--muted);
+      max-width: 62ch;
+      font-size: 1.06rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.74);
+      border-color: var(--line);
+    }
+
+    .hero-card {
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 540px;
+      position: relative;
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.38)),
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80") center/cover;
+      display: flex;
+      align-items: end;
+      padding: 24px;
+      color: #fff;
+    }
+
+    .hero-card .card-copy {
+      max-width: 36ch;
+      background: rgba(19, 15, 12, 0.44);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      padding: 18px 18px;
+      border-radius: 18px;
+    }
+
+    .section {
+      padding: 40px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 58ch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 30px rgba(34, 28, 22, 0.05);
+      overflow: hidden;
+    }
+
+    .card-pad {
+      padding: 22px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .menu-group {
+      padding: 20px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .menu-item:first-child {
+      padding-top: 0;
+    }
+
+    .menu-item h3 {
+      margin-bottom: 5px;
+      font-size: 1.03rem;
+    }
+
+    .menu-item p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .price {
+      font-weight: 800;
+      color: var(--brand);
+      white-space: nowrap;
+    }
+
+    .booking {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .info-panel {
+      padding: 24px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+    }
+
+    .hours {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .hours div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(231,221,209,0.9);
+    }
+
+    .hours div:last-child {
+      border-bottom: 0;
+    }
+
+    .form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.96);
+      border-radius: 14px;
+      padding: 14px 15px;
+      color: var(--text);
+      outline: none;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(138,90,60,0.12);
+    }
+
+    .note {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 32px 0 42px;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-3,
+      .menu-grid,
+      .booking {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        width: 100%;
+        order: 3;
+      }
+
+      h1 {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 20px, var(--max)); }
+      .actions { flex-direction: column; }
+      .btn, .cta { width: 100%; }
+      .hero { padding-top: 42px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Cafe home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Copper & Bloom</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#book">Book</a>
+      </nav>
+
+      <a class="cta" href="#book">Book a Table</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Artisan cafe · seasonal menu · relaxed atmosphere</span>
+          <h1>Fresh coffee, thoughtful food, and a calm place to linger.</h1>
+          <p class="lead">Copper & Bloom is a polished cafe concept designed to feel warm, modern, and inviting. It showcases a refined dining experience with a full menu and a booking section, ideal for a portfolio presentation.</p>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="#menu">View Menu</a>
+            <a class="btn btn-secondary" href="#book">Reserve a Table</a>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Featured cafe image">
+          <div class="card-copy">
+            <h2 style="font-size: 1.8rem; margin-bottom: 8px;">A polished cafe experience.</h2>
+            <p>Designed with soft contrast, premium spacing, and elegant visuals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Introduction</span>
+            <h2>Modern, welcoming, and easy to navigate</h2>
+          </div>
+          <p>This section sets the tone for the brand and gives visitors a short, clear reason to explore the menu and booking options.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80" alt="Fresh coffee on a cafe table">
+            <div class="card-pad">
+              <h3>Specialty coffee</h3>
+              <p>Carefully brewed hot drinks with a refined presentation and a warm, premium feel.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=1200&q=80" alt="Cafe dessert selection">
+            <div class="card-pad">
+              <h3>Homemade cakes</h3>
+              <p>Classic and seasonal cakes that look beautiful and pair well with coffee or tea.</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=1200&q=80" alt="Soup and sandwich lunch style food">
+            <div class="card-pad">
+              <h3>Lunch plates</h3>
+              <p>Soup and sandwiches for guests who want a simple, satisfying lunch experience.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Full menu</span>
+            <h2>Menu designed for quick scanning</h2>
+          </div>
+          <p>The menu is grouped into clear categories and spaced for readability across desktop and mobile 
